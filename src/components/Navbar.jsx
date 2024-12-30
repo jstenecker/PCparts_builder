@@ -1,14 +1,15 @@
 import Button from "./Button";
+import { FaHome, FaUserAlt, FaCogs, FaEnvelope } from "react-icons/fa";
 
 const Navbar = () => {
     return (
         <>
-        <Button label="Home" route="/"/>
-        <Button label="Login" route="/login"/>
-        <Button label="PC Builder" route="/pcbuilder"/>
-        <Button label="Contact" route="/contact"/>
+            <Button label={<><FaHome /> Home</>} route="/" />
+            <Button label={<><FaUserAlt /> Login</>} route="/login" />
+            <Button label={<><FaCogs /> PC Builder</>} route="/pcbuilder" />
+            <Button label={<><FaEnvelope /> Contact</>} route="/contact" />
         </>
-    )
-}
+    );
+};
 
 export default Navbar;
