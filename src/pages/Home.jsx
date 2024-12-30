@@ -3,7 +3,7 @@
 const Home = () => {
     return (
         <div>
-            <h1>Welcome to PC Parts builder!</h1>
+            <h1>Welcome to PC Pants asasdfdf builder!</h1>
         </div>
     );
 };
