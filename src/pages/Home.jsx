@@ -4,7 +4,7 @@ import React from "react";
 const Home = () => {
     return (
         <div>
-            <h1>Welcome to PC Pants asdf builder!</h1>
+            <h1>Welcome to PC Pants asasdfdf builder!</h1>
         </div>
     );
 };
