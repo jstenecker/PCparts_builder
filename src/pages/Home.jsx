@@ -1,6 +1,5 @@
 //This serves as the home page for the website, giving brief description of its purpose
 
-
 const Home = () => {
     return (
         <div>
