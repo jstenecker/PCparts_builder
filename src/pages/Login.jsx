@@ -1,5 +1,22 @@
 import { useState } from "react";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCeIZTXFxo12kM7Bu2ZIpxqc06C_LIiqn8",
+  authDomain: "pcparts-bb425.firebaseapp.com",
+  projectId: "pcparts-bb425",
+  storageBucket: "pcparts-bb425.appspot.com",
+  messagingSenderId: "380361184608",
+  appId: "1:380361184608:web:bf9e389abd1f68d2003a05",
+  measurementId: "G-Q9T6YJ5PP1",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const Login = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -44,9 +61,23 @@ const Login = () => {
     }
   };
 
-  const handleGoogleAuth = () => {
-    // Add Firebase Google authentication logic here
-    console.log("Google authentication triggered!");
+  const handleGoogleAuth = async () => {
+    try {
+      // Google login via Firebase
+      const result = await signInWithPopup(auth, provider);
+      const idToken = await result.user.getIdToken();
+
+      // Send idToken to the backend
+      const response = await axios.post("http://localhost:5000/api/auth/google", {
+        idToken,
+      });
+
+      setMessage("Google login successful!");
+      console.log("Google login response:", response.data);
+    } catch (error) {
+      setMessage("Error with Google login");
+      console.error("Google login error:", error);
+    }
   };
 
   return (
