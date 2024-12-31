@@ -4,6 +4,7 @@ const Home = () => {
     return (
         <div>
             <h1>Welcome to PC Parts builder!</h1>
+            <p></p>
         </div>
     );
 };

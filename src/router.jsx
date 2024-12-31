@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import PCbuilder from "./pages/PCbuilder";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 
 const AppRouter = () => {
     return (
