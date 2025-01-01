@@ -63,22 +63,22 @@ const Login = () => {
 
   const handleGoogleAuth = async () => {
     try {
-      // Google login via Firebase
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
-
-      // Send idToken to the backend
-      const response = await axios.post("http://localhost:5000/api/auth/google", {
+  
+      // Send idToken to backend
+      const response = await axios.post("http://localhost:5000/api/users/auth/google", {
         idToken,
       });
-
+  
       setMessage("Google login successful!");
       console.log("Google login response:", response.data);
     } catch (error) {
       setMessage("Error with Google login");
-      console.error("Google login error:", error);
+      console.error("Google login error:", error.response?.data || error);
     }
   };
+  
 
   return (
     <div style={{ maxWidth: "400px", margin: "auto", padding: "1rem" }}>
