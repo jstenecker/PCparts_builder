@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(5, 5, 5, 0.1);
 }
 
 .navbar-list {
@@ -51,9 +51,10 @@
   top: 3rem;
   right: 0;
   background-color: white;
-  color: black;
+  color: rgb(8, 8, 8);
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 150px;
   padding: 1rem;
   text-align: center;
   z-index: 1000;
@@ -61,7 +62,7 @@
 }
 
 .profile-dropdown p {
-  margin: 0 0 1rem;
+  margin: 0 0 1cm;
 }
 
 .dropdown-btn {
