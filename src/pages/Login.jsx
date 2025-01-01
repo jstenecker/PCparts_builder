@@ -28,24 +28,24 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const saveUser = (userData) => {
+  const saveUser = (userData, token) => {
     localStorage.setItem("user", JSON.stringify(userData));
-    const event = new Event("userUpdate");
-    window.dispatchEvent(event); // Dispatch custom event
+    localStorage.setItem("token", token); // Save token for authorization
+    window.dispatchEvent(new Event("userUpdate")); // Notify other components of the update
     const redirectPath = localStorage.getItem("redirectPath") || "/";
     navigate(redirectPath);
   };
-  
 
   // Handle Manual Login
   const handleLogin = async (event) => {
     event.preventDefault();
+    setMessage(""); // Clear any existing messages
     try {
       const response = await axios.post("http://localhost:5000/api/users/login", {
         email,
         password,
       });
-      saveUser(response.data.user);
+      saveUser(response.data.user, response.data.token);
       setMessage("Login successful!");
     } catch (error) {
       setMessage(error.response?.data?.message || "Error logging in");
@@ -56,13 +56,14 @@ const Login = () => {
   // Handle Manual Registration
   const handleRegister = async (event) => {
     event.preventDefault();
+    setMessage(""); // Clear any existing messages
     try {
       const response = await axios.post("http://localhost:5000/api/users/register", {
         name,
         email,
         password,
       });
-      saveUser(response.data.user);
+      saveUser(response.data.user, response.data.token);
       setMessage("Registration successful!");
       setIsRegistering(false); // Switch to login view
     } catch (error) {
@@ -73,13 +74,14 @@ const Login = () => {
 
   // Handle Google Login
   const handleGoogleAuth = async () => {
+    setMessage(""); // Clear any existing messages
     try {
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
       const response = await axios.post("http://localhost:5000/api/users/auth/google", {
         idToken,
       });
-      saveUser(response.data.user);
+      saveUser(response.data.user, response.data.token);
       setMessage("Google login successful!");
     } catch (error) {
       setMessage(error.response?.data?.message || "Error with Google login");
@@ -129,18 +131,44 @@ const Login = () => {
             style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc" }}
           />
         </div>
-        <button type="submit" style={{ width: "100%", padding: "0.75rem", backgroundColor: isRegistering ? "#007BFF" : "#4CAF50", color: "white" }}>
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "0.75rem",
+            backgroundColor: isRegistering ? "#007BFF" : "#4CAF50",
+            color: "white",
+          }}
+        >
           {isRegistering ? "Register" : "Log In"}
         </button>
       </form>
-      <p style={{ textAlign: "center", margin: "1rem 0", color: "#f44336" }}>{message}</p>
+      <p style={{ textAlign: "center", margin: "1rem 0", color: "#f44336" }}>
+        {message}
+      </p>
       <hr />
-      <button onClick={handleGoogleAuth} style={{ width: "100%", padding: "0.75rem", backgroundColor: "#4285F4", color: "white" }}>
+      <button
+        onClick={handleGoogleAuth}
+        style={{
+          width: "100%",
+          padding: "0.75rem",
+          backgroundColor: "#4285F4",
+          color: "white",
+        }}
+      >
         Log in with Google
       </button>
       <p style={{ textAlign: "center", marginTop: "1rem" }}>
         {isRegistering ? "Already have an account?" : "Don't have an account?"}{" "}
-        <button onClick={() => setIsRegistering(!isRegistering)} style={{ background: "none", border: "none", color: "#007BFF", cursor: "pointer" }}>
+        <button
+          onClick={() => setIsRegistering(!isRegistering)}
+          style={{
+            background: "none",
+            border: "none",
+            color: "#007BFF",
+            cursor: "pointer",
+          }}
+        >
           {isRegistering ? "Log In" : "Register"}
         </button>
       </p>

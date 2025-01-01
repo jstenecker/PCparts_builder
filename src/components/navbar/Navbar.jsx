@@ -78,7 +78,7 @@ const Navbar = () => {
                   onClick={() => navigate("/profile")}
                   className="dropdown-btn"
                 >
-                  My Builds
+                  Profile
                 </button>
                 <button onClick={handleLogout} className="dropdown-btn">
                   Sign Out
