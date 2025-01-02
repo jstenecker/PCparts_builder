@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{html,js,jsx,ts,tsx}', // Add paths to all your components/pages
-  ],
+  content: ['./src/**/*.{html,js,jsx,ts,tsx}'], // Add paths to all your components/pages
   theme: {
     extend: {
       colors: {
@@ -17,7 +15,7 @@ module.exports = {
         inter: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
       },
       spacing: {
-        'hero-height': '300px', // Example for hero section
+        'hero-height': '300px',
       },
     },
   },

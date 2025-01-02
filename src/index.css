@@ -4,7 +4,7 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: 400;
 
   /* Color scheme variables */
@@ -26,6 +26,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  @apply m-0 flex flex-col items-center justify-center min-h-screen bg-background text-text font-inter;
+}
+
 a {
   @apply font-medium text-primary no-underline transition-colors ease-in-out duration-300;
 }
@@ -33,19 +37,28 @@ a:hover {
   @apply text-primary-hover;
 }
 
-body {
-  @apply m-0 flex items-center justify-center min-h-screen bg-background text-text;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold text-center;
 }
 
 h1 {
-  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-center font-bold;
+  @apply text-4xl sm:text-5xl md:text-6xl leading-tight mb-6;
+}
+
+p {
+  @apply text-lg leading-relaxed mb-4;
 }
 
 button {
-  @apply rounded-lg border border-transparent py-2 px-4 text-base sm:text-lg md:text-xl lg:text-2xl font-medium bg-card text-text transition-all duration-300 ease-in-out;
+  @apply rounded-lg border border-transparent py-3 px-6 text-base sm:text-lg md:text-xl font-medium bg-primary text-white transition-all duration-300 ease-in-out;
 }
 button:hover {
-  @apply border-primary bg-primary-hover text-white;
+  @apply bg-primary-hover;
 }
 button:focus,
 button:focus-visible {
@@ -53,37 +66,75 @@ button:focus-visible {
 }
 
 nav {
-  @apply bg-card py-4 w-full flex justify-center items-center gap-4 shadow-md;
+  @apply bg-card py-4 px-6 w-full flex justify-between items-center shadow-lg sticky top-0 z-50;
 }
 
 nav ul {
-  @apply list-none flex flex-col sm:flex-row gap-4;
+  @apply list-none flex flex-row gap-6;
 }
 
 nav ul li a {
   @apply text-text py-2 px-4 rounded-lg hover:bg-primary-hover hover:text-white transition-colors ease-in-out;
 }
 
+.hero {
+  @apply bg-gradient-to-r from-primary to-primary-hover text-white flex flex-col justify-center items-center text-center w-full;
+  height: 350px;
+}
+
+.hero h1 {
+  @apply text-5xl sm:text-6xl font-extrabold mb-4;
+}
+
+.hero p {
+  @apply text-lg sm:text-xl md:text-2xl text-white max-w-3xl mx-auto;
+}
+
+.card {
+  @apply bg-card text-text p-6 rounded-lg shadow-md mb-6;
+}
+
 footer {
   @apply bg-card text-center py-4 text-text mt-auto;
 }
 
-.hero {
-  @apply bg-gradient-to-r from-primary to-primary-hover text-white flex justify-center items-center text-center w-full;
-  height: 300px;
+.footer-text {
+  @apply text-sm;
 }
 
-.hero h1 {
-  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+form {
+  @apply bg-card p-8 rounded-lg shadow-lg max-w-lg mx-auto;
+}
+
+form label {
+  @apply block text-sm font-medium mb-2;
+}
+
+form input,
+form textarea {
+  @apply w-full p-3 border border-secondary rounded-md bg-background text-text;
+}
+
+form input:focus,
+form textarea:focus {
+  @apply outline-none ring-2 ring-primary;
+}
+
+form textarea {
+  @apply h-32 resize-none;
+}
+
+form button {
+  @apply bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-hover transition duration-300;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --primary-color: #213547;
     --primary-hover-color: #747bff;
-    --background-color: #ffffff;
+    --background-color: #f7f9fc;
     --text-color: #213547;
-    --card-bg-color: #f9f9f9;
+    --card-bg-color: #ffffff;
   }
 
   a:hover {
