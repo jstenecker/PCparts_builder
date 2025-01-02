@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Button = ({ label, route }) => {
+const Button = ({ route, onClick, children }) => {
     const navigate = useNavigate();
 
+    //custom click behavior can be passed in with "onClick" prop, otherwise button will be used for route navigation
     const handleClick = () => {
+        if (onClick) {
+            onClick();
+        }
         if (route) {
             navigate(route);
         }
@@ -29,7 +33,7 @@ const Button = ({ label, route }) => {
                 transition: "background-color 0.3s",
             }}
         >
-            {label}
+            {children}
         </motion.button>
     );
 };
