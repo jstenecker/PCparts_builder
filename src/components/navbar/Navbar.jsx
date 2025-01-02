@@ -63,6 +63,13 @@ const Navbar = () => {
             <FaEnvelope /> Contact
           </Link>
         </li>
+        {user && (
+          <li className="navbar-item">
+            <Link to="/my-builds" className="navbar-link">
+              My Builds
+            </Link>
+          </li>
+        )}
       </ul>
       <div className="navbar-profile">
         <FaUserCircle
