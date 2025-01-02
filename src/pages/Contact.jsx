@@ -48,6 +48,8 @@ const Contact = () => {
   return (
     <div className="contact-form" style={styles.container}>
       <h1 style={styles.heading}>Contact Us</h1>
+        <p style={styles.heading}>Use the form below to get in touch with our team.</p>
+        <p style={styles.heading}>We will be in touch with you ASAP!</p>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.inputGroup}>
           <label htmlFor="name" style={styles.label}>Name:</label>
