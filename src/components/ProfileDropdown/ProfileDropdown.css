@@ -1,0 +1,52 @@
+.profile-dropdown {
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    top: 100%; /* Start below the parent element */
+    right: 0; /* Align to the right */
+    background: var(--background-light);
+    color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it appears above other elements */
+    width: 200px; /* Adjust width to fit your design */
+  }
+  
+  .navbar-profile {
+    position: relative; /* Needed for the dropdown's absolute positioning to work */
+  }
+  
+  .profile-dropdown .dropdown-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .profile-dropdown .dropdown-btn {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .profile-dropdown .dropdown-btn:hover {
+    background: var(--primary-color-hover);
+  }
+  
+  .profile-dropdown .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+  }
+  

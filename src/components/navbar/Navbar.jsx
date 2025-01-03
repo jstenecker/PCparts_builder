@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaHome, FaCogs, FaTools, FaEnvelope, FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
+import { FaHome, FaCogs, FaTools, FaEnvelope, FaUserCircle } from "react-icons/fa";
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -10,7 +11,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Load user and theme preference on mount
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
@@ -22,7 +22,6 @@ const Navbar = () => {
     document.documentElement.setAttribute("data-theme", savedTheme ? "dark" : "light");
   }, []);
 
-  // Listen for custom "userUpdate" event
   useEffect(() => {
     const handleUserUpdate = () => {
       const updatedUser = JSON.parse(localStorage.getItem("user"));
@@ -35,22 +34,19 @@ const Navbar = () => {
     };
   }, []);
 
-  // Handle Login Redirect
   const handleLogin = () => {
-    localStorage.setItem("redirectPath", location.pathname); // Save current path
-    navigate("/login"); // Redirect to login page
+    localStorage.setItem("redirectPath", location.pathname);
+    navigate("/login");
   };
 
-  // Handle Logout
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Remove user from localStorage
-    const event = new Event("userUpdate"); // Trigger custom event
+    localStorage.removeItem("user");
+    const event = new Event("userUpdate");
     window.dispatchEvent(event);
-    setDropdownVisible(false); // Close dropdown
-    navigate("/"); // Redirect to home
+    setDropdownVisible(false);
+    navigate("/");
   };
 
-  // Toggle Dark Mode
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
@@ -105,61 +101,15 @@ const Navbar = () => {
           />
         )}
         {dropdownVisible && (
-          <div className="profile-dropdown">
-            <button
-              onClick={() => setDropdownVisible(false)}
-              className="dropdown-close-btn"
-              style={{
-                position: "absolute",
-                top: "5px",
-                right: "5px",
-                background: "transparent",
-                border: "none",
-                color: darkMode ? "white" : "black",
-                fontSize: "16px",
-                cursor: "pointer",
-              }}
-            >
-              ✕
-            </button>
-            {user ? (
-              <>
-                <p>Hello, {user.name}!</p>
-                <button
-                  onClick={() => navigate("/profile")}
-                  className="dropdown-btn"
-                >
-                  Profile
-                </button>
-                <button onClick={handleLogout} className="dropdown-btn">
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <>
-                <p>You are not signed in</p>
-                <button onClick={handleLogin} className="dropdown-btn">
-                  Login
-                </button>
-              </>
-            )}
-            <hr />
-            {/* Theme Selector */}
-            <div
-              className="theme-toggle"
-              onClick={toggleDarkMode}
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                marginTop: "0.5rem",
-              }}
-            >
-              {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
-              <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
-            </div>
-          </div>
+          <ProfileDropdown
+            user={user}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            closeDropdown={() => setDropdownVisible(false)}
+            navigate={navigate}
+          />
         )}
       </div>
     </nav>
