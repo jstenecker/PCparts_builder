@@ -1,6 +1,6 @@
 // src/components/ProfileDropdown.jsx
-import React from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import PropTypes from "prop-types"; // Import PropTypes for prop validation
 import "./ProfileDropdown.css";
 
 const ProfileDropdown = ({
@@ -19,8 +19,11 @@ const ProfileDropdown = ({
       </button>
       {user ? (
         <>
-          <p>Hello, {user.name}!</p>
-          <button onClick={() => navigate("/profile")} className="dropdown-btn">
+          <p className="welcome-text">Hello, {user.name}!</p>
+          <button
+            onClick={() => navigate("/profile")}
+            className="dropdown-btn"
+          >
             Profile
           </button>
           <button onClick={handleLogout} className="dropdown-btn">
@@ -29,19 +32,32 @@ const ProfileDropdown = ({
         </>
       ) : (
         <>
-          <p>You are not signed in</p>
+          <p className="welcome-text">You are not signed in</p>
           <button onClick={handleLogin} className="dropdown-btn">
             Login
           </button>
         </>
       )}
-      <hr />
+      <hr className="dropdown-divider" />
       <div className="theme-toggle" onClick={toggleDarkMode}>
         {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
         <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
       </div>
     </div>
   );
+};
+
+// Prop validation for safety
+ProfileDropdown.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+  }),
+  darkMode: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+  closeDropdown: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 export default ProfileDropdown;
