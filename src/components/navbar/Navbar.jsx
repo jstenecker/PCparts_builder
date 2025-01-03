@@ -85,13 +85,27 @@ const Navbar = () => {
         )}
       </ul>
       <div className="navbar-profile">
-        <FaUserCircle
-          className="profile-icon"
-          onClick={() => setDropdownVisible(!dropdownVisible)}
-        />
+        {user?.profilePicture ? (
+          <img
+            src={user.profilePicture}
+            alt="Profile"
+            className="profile-picture"
+            onClick={() => setDropdownVisible(!dropdownVisible)}
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              cursor: "pointer",
+            }}
+          />
+        ) : (
+          <FaUserCircle
+            className="profile-icon"
+            onClick={() => setDropdownVisible(!dropdownVisible)}
+          />
+        )}
         {dropdownVisible && (
           <div className="profile-dropdown">
-            {/* ✕ button to close the dropdown */}
             <button
               onClick={() => setDropdownVisible(false)}
               className="dropdown-close-btn"
