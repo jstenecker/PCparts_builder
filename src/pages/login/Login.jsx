@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import "./Login.css"; // Import the CSS file
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -36,7 +37,6 @@ const Login = () => {
     navigate(redirectPath);
   };
 
-  // Handle Manual Login
   const handleLogin = async (event) => {
     event.preventDefault();
     setMessage(""); // Clear any existing messages
@@ -53,7 +53,6 @@ const Login = () => {
     }
   };
 
-  // Handle Manual Registration
   const handleRegister = async (event) => {
     event.preventDefault();
     setMessage(""); // Clear any existing messages
@@ -72,7 +71,6 @@ const Login = () => {
     }
   };
 
-  // Handle Google Login
   const handleGoogleAuth = async () => {
     setMessage(""); // Clear any existing messages
     try {
@@ -90,11 +88,11 @@ const Login = () => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "1rem" }}>
+    <div className="login-container">
       <h1>{isRegistering ? "Register" : "Login"}</h1>
       <form onSubmit={isRegistering ? handleRegister : handleLogin}>
         {isRegistering && (
-          <div style={{ marginBottom: "1rem" }}>
+          <div className="form-group">
             <label htmlFor="name">Name:</label>
             <input
               type="text"
@@ -103,11 +101,10 @@ const Login = () => {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
               required
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc" }}
             />
           </div>
         )}
-        <div style={{ marginBottom: "1rem" }}>
+        <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -116,10 +113,9 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
-            style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc" }}
           />
         </div>
-        <div style={{ marginBottom: "1rem" }}>
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -128,47 +124,20 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required={!isRegistering}
-            style={{ width: "100%", padding: "0.5rem", border: "1px solid #ccc" }}
           />
         </div>
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "0.75rem",
-            backgroundColor: isRegistering ? "#007BFF" : "#4CAF50",
-            color: "white",
-          }}
-        >
+        <button type="submit" className={`form-button ${isRegistering ? "register" : "login"}`}>
           {isRegistering ? "Register" : "Log In"}
         </button>
       </form>
-      <p style={{ textAlign: "center", margin: "1rem 0", color: "#f44336" }}>
-        {message}
-      </p>
+      <p className="message">{message}</p>
       <hr />
-      <button
-        onClick={handleGoogleAuth}
-        style={{
-          width: "100%",
-          padding: "0.75rem",
-          backgroundColor: "#4285F4",
-          color: "white",
-        }}
-      >
+      <button onClick={handleGoogleAuth} className="google-button">
         Log in with Google
       </button>
-      <p style={{ textAlign: "center", marginTop: "1rem" }}>
+      <p className="toggle-text">
         {isRegistering ? "Already have an account?" : "Don't have an account?"}{" "}
-        <button
-          onClick={() => setIsRegistering(!isRegistering)}
-          style={{
-            background: "none",
-            border: "none",
-            color: "#007BFF",
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={() => setIsRegistering(!isRegistering)} className="toggle-button">
           {isRegistering ? "Log In" : "Register"}
         </button>
       </p>

@@ -1,11 +1,11 @@
 // Navigates between pages
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Login from "./pages/Login";
-import PCbuilder from "./pages/PCbuilder";
-import UserProfile from "./pages/UserProfile";
-import MyBuilds from "./pages/MyBuilds";
+import Home from "./pages/home/Home.jsx";
+import Contact from "./pages/contact/Contact.jsx";
+import Login from "./pages/login/Login.jsx";
+import PCbuilder from "./pages/pcbuilder/PCbuilder.jsx";
+import UserProfile from "./pages/userprofile/UserProfile.jsx";
+import MyBuilds from "./pages/mybuilds/MyBuilds.jsx";
 import Navbar from "./components/navbar/Navbar";
 
 // Function to check if user is authenticated
