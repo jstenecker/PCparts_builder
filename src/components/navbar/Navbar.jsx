@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaHome, FaCogs, FaEnvelope, FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
+import { FaHome, FaCogs, FaTools, FaEnvelope, FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -79,7 +79,7 @@ const Navbar = () => {
         {user && (
           <li className="navbar-item">
             <Link to="/my-builds" className="navbar-link">
-              My Builds
+              <FaTools /> My Builds
             </Link>
           </li>
         )}
