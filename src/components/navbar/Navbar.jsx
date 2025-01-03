@@ -78,6 +78,23 @@ const Navbar = () => {
         />
         {dropdownVisible && (
           <div className="profile-dropdown">
+            {/* ✕ button to close the dropdown */}
+            <button
+              onClick={() => setDropdownVisible(false)}
+              className="dropdown-close-btn"
+              style={{
+                position: "absolute",
+                top: "5px",
+                right: "5px",
+                background: "transparent",
+                border: "none",
+                color: "black",
+                fontSize: "16px",
+                cursor: "pointer",
+              }}
+            >
+              ✕
+            </button>
             {user ? (
               <>
                 <p>Hello, {user.name}!</p>
