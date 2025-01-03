@@ -7,7 +7,7 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Color scheme variables */
+  /* Default (Dark) Color Scheme */
   --primary-color: #646cff;
   --primary-hover-color: #535bf2;
   --secondary-color: #f9a825;
@@ -15,15 +15,16 @@
   --text-color: rgba(255, 255, 255, 0.87);
   --card-bg-color: #1a1a1a;
   --button-hover-color: #747bff;
+  color-scheme: dark;
+}
 
-  color-scheme: light dark;
-  color: var(--text-color);
-  background-color: var(--background-color);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+[data-theme="light"] {
+  /* Light Mode Color Scheme */
+  --primary-color: #213547;
+  --primary-hover-color: #747bff;
+  --background-color: #f7f9fc;
+  --text-color: #213547;
+  --card-bg-color: #ffffff;
 }
 
 body {
@@ -128,20 +129,11 @@ form button {
   @apply bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-hover transition duration-300;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --primary-color: #213547;
-    --primary-hover-color: #747bff;
-    --background-color: #f7f9fc;
-    --text-color: #213547;
-    --card-bg-color: #ffffff;
-  }
+/* Transition support for theme change */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-  a:hover {
-    color: var(--button-hover-color);
-  }
-
-  button {
-    background-color: var(--card-bg-color);
-  }
+[data-theme="light"] a:hover {
+  color: var(--button-hover-color);
 }

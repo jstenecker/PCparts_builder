@@ -1,20 +1,25 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaHome, FaCogs, FaEnvelope, FaUserCircle } from "react-icons/fa";
+import { FaHome, FaCogs, FaEnvelope, FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Load user from localStorage on mount
+  // Load user and theme preference on mount
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
     }
+
+    const savedTheme = localStorage.getItem("darkMode") === "true";
+    setDarkMode(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme ? "dark" : "light");
   }, []);
 
   // Listen for custom "userUpdate" event
@@ -43,6 +48,14 @@ const Navbar = () => {
     window.dispatchEvent(event);
     setDropdownVisible(false); // Close dropdown
     navigate("/"); // Redirect to home
+  };
+
+  // Toggle Dark Mode
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem("darkMode", newDarkMode);
+    document.documentElement.setAttribute("data-theme", newDarkMode ? "dark" : "light");
   };
 
   return (
@@ -88,7 +101,7 @@ const Navbar = () => {
                 right: "5px",
                 background: "transparent",
                 border: "none",
-                color: "black",
+                color: darkMode ? "white" : "black",
                 fontSize: "16px",
                 cursor: "pointer",
               }}
@@ -116,6 +129,22 @@ const Navbar = () => {
                 </button>
               </>
             )}
+            <hr />
+            {/* Theme Selector */}
+            <div
+              className="theme-toggle"
+              onClick={toggleDarkMode}
+              style={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                marginTop: "0.5rem",
+              }}
+            >
+              {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+              <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
+            </div>
           </div>
         )}
       </div>
