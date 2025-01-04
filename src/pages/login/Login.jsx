@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import "./Login.css"; // Import the CSS file
+import "./Login.css";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -88,59 +88,64 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1>{isRegistering ? "Register" : "Login"}</h1>
-      <form onSubmit={isRegistering ? handleRegister : handleLogin}>
-        {isRegistering && (
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
+    <div className="page-container">
+      <div className="login-container">
+        <h1 className="login-title">{isRegistering ? "Register" : "Login"}</h1>
+        <form onSubmit={isRegistering ? handleRegister : handleLogin} className="login-form">
+          {isRegistering && (
+            <div className="login-input-group">
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+                required
+                className="login-input"
+              />
+            </div>
+          )}
+          <div className="login-input-group">
+            <label htmlFor="email">Email:</label>
             <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               required
+              className="login-input"
             />
           </div>
-        )}
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required={!isRegistering}
-          />
-        </div>
-        <button type="submit" className={`form-button ${isRegistering ? "register" : "login"}`}>
-          {isRegistering ? "Register" : "Log In"}
+          <div className="login-input-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required={!isRegistering}
+              className="login-input"
+            />
+          </div>
+          <button type="submit" className="login-button">
+            {isRegistering ? "Register" : "Log In"}
+          </button>
+        </form>
+        <p className="login-message">{message}</p>
+        <hr />
+        <button onClick={handleGoogleAuth} className="google-login-button">
+          Log in with Google
         </button>
-      </form>
-      <p className="message">{message}</p>
-      <hr />
-      <button onClick={handleGoogleAuth} className="google-button">
-        Log in with Google
-      </button>
-      <p className="toggle-text">
-        {isRegistering ? "Already have an account?" : "Don't have an account?"}{" "}
-        <button onClick={() => setIsRegistering(!isRegistering)} className="toggle-button">
-          {isRegistering ? "Log In" : "Register"}
-        </button>
-      </p>
+        <p className="login-switch">
+          {isRegistering ? "Already have an account?" : "Don't have an account?"}{" "}
+          <button onClick={() => setIsRegistering(!isRegistering)} className="login-switch-button">
+            {isRegistering ? "Log In" : "Register"}
+          </button>
+        </p>
+      </div>
     </div>
   );
 };

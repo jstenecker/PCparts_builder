@@ -1,8 +1,13 @@
+import { useState, useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import PropTypes from "prop-types";
 import "./ProfileDropdown.css";
 
 const ProfileDropdown = ({ user, closeDropdown }) => {
+  const [darkMode, setDarkMode] = useState(
+    document.documentElement.getAttribute("data-theme") === "dark"
+  );
+
   const navigate = (path) => {
     closeDropdown();
     window.location.assign(path);
@@ -21,13 +26,17 @@ const ProfileDropdown = ({ user, closeDropdown }) => {
   };
 
   const toggleDarkMode = () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    const newTheme = darkMode ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("darkMode", newTheme === "dark");
+    setDarkMode(!darkMode); // Update local state
   };
 
-  const darkMode = document.documentElement.getAttribute("data-theme") === "dark";
+  useEffect(() => {
+    // Sync the theme state with the current theme on mount
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    setDarkMode(currentTheme === "dark");
+  }, []);
 
   return (
     <div className="profile-dropdown">
