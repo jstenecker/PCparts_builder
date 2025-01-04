@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaHome, FaCogs, FaTools, FaEnvelope, FaUserCircle } from "react-icons/fa";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import "./Navbar.css";
@@ -7,19 +7,12 @@ import "./Navbar.css";
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setUser(storedUser);
     }
-
-    const savedTheme = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme ? "dark" : "light");
   }, []);
 
   useEffect(() => {
@@ -34,24 +27,8 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleLogin = () => {
-    localStorage.setItem("redirectPath", location.pathname);
-    navigate("/login");
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    const event = new Event("userUpdate");
-    window.dispatchEvent(event);
-    setDropdownVisible(false);
-    navigate("/");
-  };
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    localStorage.setItem("darkMode", newDarkMode);
-    document.documentElement.setAttribute("data-theme", newDarkMode ? "dark" : "light");
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
   };
 
   return (
@@ -86,7 +63,7 @@ const Navbar = () => {
             src={user.profilePicture}
             alt="Profile"
             className="profile-picture"
-            onClick={() => setDropdownVisible(!dropdownVisible)}
+            onClick={toggleDropdown}
             style={{
               width: "40px",
               height: "40px",
@@ -97,18 +74,13 @@ const Navbar = () => {
         ) : (
           <FaUserCircle
             className="profile-icon"
-            onClick={() => setDropdownVisible(!dropdownVisible)}
+            onClick={toggleDropdown}
           />
         )}
         {dropdownVisible && (
           <ProfileDropdown
             user={user}
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
             closeDropdown={() => setDropdownVisible(false)}
-            navigate={navigate}
           />
         )}
       </div>
