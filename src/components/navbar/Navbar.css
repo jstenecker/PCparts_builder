@@ -45,39 +45,3 @@
   cursor: pointer;
   color: var(--text-color);
 }
-
-.profile-dropdown {
-  position: absolute;
-  top: 3rem;
-  right: 0;
-  background-color: white;
-  color: rgb(8, 8, 8);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 150px;
-  padding: 1rem;
-  text-align: center;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.profile-dropdown p {
-  margin: 0 0 1cm;
-}
-
-.dropdown-btn {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 0;
-  margin-bottom: 0.5rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.dropdown-btn:hover {
-  background-color: var(--primary-hover-color);
-}
