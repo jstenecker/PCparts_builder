@@ -61,14 +61,19 @@ const Navbar = () => {
         {user?.profilePicture ? (
           <img
             src={user.profilePicture}
-            alt="Profile"
+            alt="Google Profile Picture"
             className="profile-picture"
+            onError={(e) => {
+              e.target.onerror = null; // Prevent infinite loop
+              e.target.src = "https://via.placeholder.com/40"; // Fallback image
+            }}
             onClick={toggleDropdown}
             style={{
               width: "40px",
               height: "40px",
               borderRadius: "50%",
               cursor: "pointer",
+              objectFit: "cover",
             }}
           />
         ) : (

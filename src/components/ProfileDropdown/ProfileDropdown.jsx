@@ -57,8 +57,7 @@ const ProfileDropdown = ({ user, closeDropdown }) => {
       )}
       <hr className="dropdown-divider" />
       <div className="theme-toggle" onClick={toggleDarkMode}>
-        {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
-        <span>{darkMode ? "Light Mode" : "Dark Mode"}</span>
+        {darkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
       </div>
     </div>
   );

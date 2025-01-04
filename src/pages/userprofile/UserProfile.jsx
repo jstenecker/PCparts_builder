@@ -25,7 +25,17 @@ const UserProfile = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
+        // Save user data to state and localStorage
         setUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+
+        // Dispatch custom event to notify other components
+        const userUpdatedEvent = new Event("userUpdated");
+        window.dispatchEvent(userUpdatedEvent);
+
+        // Debugging log to verify the profile picture
+        console.log("Fetched user data:", response.data);
       } catch (error) {
         console.error("Error fetching profile:", error.response?.data || error);
         setMessage("Error fetching profile. Please log in again.");
@@ -74,6 +84,11 @@ const UserProfile = () => {
       });
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+
+      // Dispatch custom event to notify other components
+      const userUpdatedEvent = new Event("userUpdated");
+      window.dispatchEvent(userUpdatedEvent);
+
       window.location.href = "/"; // Redirect to home page
     } catch (error) {
       console.error("Error deleting account:", error.response?.data || error);
