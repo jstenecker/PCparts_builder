@@ -15,6 +15,7 @@
   --text-color: rgba(255, 255, 255, 0.87);
   --card-bg-color: #1a1a1a;
   --button-hover-color: #747bff;
+  --card-bg-color-translucent: rgba(26, 26, 26, 0.87);
   color-scheme: dark;
 }
 
@@ -25,6 +26,7 @@
   --background-color: #f7f9fc;
   --text-color: #213547;
   --card-bg-color: #ffffff;
+  --card-bg-color-translucent: rgba(255, 255, 255, 0.87);
 }
 
 body {

@@ -2,6 +2,7 @@ body {
   background: var(--background-color); /* Ensure background applies to the entire page */
   color: var(--text-color); 
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 6rem;
 }
 
 .home-container {

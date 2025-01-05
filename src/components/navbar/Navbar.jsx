@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaCogs, FaTools, FaEnvelope, FaUserCircle } from "react-icons/fa";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
@@ -7,6 +7,7 @@ import "./Navbar.css";
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -27,12 +28,27 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <ul className="navbar-list">
         <li className="navbar-item">
           <Link to="/" className="navbar-link">
