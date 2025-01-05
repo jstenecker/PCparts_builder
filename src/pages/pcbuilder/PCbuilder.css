@@ -71,3 +71,33 @@ body {
   font-size: 1rem;
   color: var(--text-color); /* Ensure message text follows theme */
 }
+
+/* Styles for hierarchical dropdowns */
+.nested-dropdown {
+  margin-left: 20px; /* Indent for nested items */
+  padding: 5px 0;
+}
+
+.dropdown-item {
+  cursor: pointer;
+  padding: 5px;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-hover-color);
+  color: var(--text-color-hover);
+}
+
+.dropdown-item.selected {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.nested-dropdown label {
+  font-weight: normal;
+  margin-left: 5px;
+  color: var(--text-color-secondary);
+}
