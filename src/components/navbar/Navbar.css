@@ -20,7 +20,7 @@
 
 .navbar.scrolled {
   height: 1.5rem; /* Reduce height by 15% */
-  box-shadow: 0 8px 16px rgba(53, 53, 53, 0.2); /* Slight drop shadow */
+  box-shadow: 0 8px 16px rgba(20, 20, 20, 0.2); /* Slight drop shadow */
 
 }
 
