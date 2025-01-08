@@ -25,7 +25,6 @@ const PCbuilder = () => {
       setOptions([]);
     }
   };
-  
 
   useEffect(() => {
     fetchOptions(category);
@@ -43,7 +42,10 @@ const PCbuilder = () => {
       await axios.post(
         "http://localhost:5000/api/builds/submit",
         {
-          ...components,
+          cpu: components.cpu ? components.cpu.name : "Not selected",
+          gpu: components.gpu ? components.gpu.name : "Not selected",
+          ram: components.ram ? components.ram.name : "Not selected",
+          storage: components.storage ? components.storage.name : "Not selected",
           name,
         },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
@@ -96,7 +98,11 @@ const PCbuilder = () => {
                 className="pcb-option"
                 onClick={() => handleSelect(category, option)}
               >
-                <img src={option.image} alt={option.name} className="pcb-option-image" />
+                <img
+                  src={option.image}
+                  alt={option.name}
+                  className="pcb-option-image"
+                />
                 <div className="pcb-option-info">
                   <h3>{option.name}</h3>
                   <p>{option.price || "Price unavailable"}</p>
