@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./PCbuilder.css"; // Updated CSS for PCPartPicker-like design
+import "./PCbuilder.css";
 
 const PCbuilder = () => {
   const [components, setComponents] = useState({
@@ -25,6 +25,7 @@ const PCbuilder = () => {
       setOptions([]);
     }
   };
+  
 
   useEffect(() => {
     fetchOptions(category);
@@ -37,7 +38,7 @@ const PCbuilder = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage("");
-
+  
     try {
       await axios.post(
         "http://localhost:5000/api/builds/submit",
@@ -56,6 +57,7 @@ const PCbuilder = () => {
       console.error("Error submitting build:", error);
     }
   };
+  
 
   const filteredOptions = options.filter((option) =>
     option.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -98,11 +100,7 @@ const PCbuilder = () => {
                 className="pcb-option"
                 onClick={() => handleSelect(category, option)}
               >
-                <img
-                  src={option.image}
-                  alt={option.name}
-                  className="pcb-option-image"
-                />
+                <img src={option.image} alt={option.name} className="pcb-option-image" />
                 <div className="pcb-option-info">
                   <h3>{option.name}</h3>
                   <p>{option.price || "Price unavailable"}</p>
