@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import Home from "./pages/home/Home.jsx";
 import Contact from "./pages/contact/Contact.jsx";
 import Login from "./pages/login/Login.jsx";
+import PCbuilder from "./pages/pcbuilder/PCbuilder.jsx";
 import UserProfile from "./pages/userprofile/UserProfile.jsx";
+import MyBuilds from "./pages/mybuilds/MyBuilds.jsx";
 import Navbar from "./components/navbar/Navbar";
 
 // Function to check if user is authenticated
@@ -19,10 +21,20 @@ const AppRouter = () => {
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-
+                <Route path="/pcbuilder" element={<PCbuilder />} />
                 <Route path="/contact" element={<Contact />} />
 
                 {/* Protected Routes */}
+                <Route
+                    path="/my-builds"
+                    element={
+                        isAuthenticated() ? (
+                            <MyBuilds />
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    }
+                />
                 <Route
                     path="/profile"
                     element={

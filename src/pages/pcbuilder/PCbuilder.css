@@ -1,0 +1,201 @@
+/* Theme Variables */
+:root {
+  --background-color: #f8f9fa; /* Default light background */
+  --text-color: #212529; /* Default light text color */
+  --card-bg-color: #ffffff; /* Default light card color */
+  --border-color: #ddd;
+  --primary-color: #007bff;
+  --primary-hover-color: #0056b3;
+}
+
+[data-theme="dark"] {
+  --background-color: #121212; /* Dark background */
+  --text-color: #f8f9fa; /* Light text for dark mode */
+  --card-bg-color: #1e1e1e; /* Dark card background */
+  --border-color: #333;
+  --primary-color: #0d6efd;
+  --primary-hover-color: #0a58ca;
+}
+
+/* General Body Styling */
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* PC Builder Container */
+.pcb-container {
+  max-width: 2000px;
+  align-self: center;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Title */
+.pcb-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+/* Layout */
+.pcb-layout {
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem;
+}
+
+/* Sidebar */
+.pcb-sidebar{
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  position: fixed;
+  left: 0px;
+  width: 150px;
+  max-width: 150px;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.pcb-summary {
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  position: fixed;
+  right: 0px;
+  max-width: 200px;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.sidebar-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-item.active {
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+/* Content Area */
+.pcb-content {
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  position: absolute;
+  left: 200px;
+  right: 250px;
+  max-width: 1580px;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Search Input */
+.pcb-search {
+  position: relative;
+  align-self: center;
+  width: 99%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.pcb-search:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Options Grid */
+.pcb-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.pcb-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  background: var(--card-bg-color);
+  transition: transform 0.3s, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.pcb-option:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-hover-color);
+  color: white;
+}
+
+/* Option Image */
+.pcb-option-image {
+  height: 50px;
+  width: 50px;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+}
+
+/* Option Info */
+.pcb-option-info {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: var(--text-color);
+}
+
+/* Build Name Input */
+.pcb-build-name input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.pcb-build-name input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Submit Button */
+.pcb-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pcb-button:hover {
+  background: var(--primary-hover-color);
+  transform: scale(1.03);
+}
+
+/* Message Styling */
+.pcb-message {
+  margin-top: 1rem;
+  color: green;
+  text-align: center;
+}

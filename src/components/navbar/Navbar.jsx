@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaTools, FaEnvelope, FaUserCircle } from "react-icons/fa";
+import { FaHome, FaCogs, FaTools, FaEnvelope, FaUserCircle } from "react-icons/fa";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 import "./Navbar.css";
 
@@ -53,6 +53,11 @@ const Navbar = () => {
         <li className="navbar-item">
           <Link to="/" className="navbar-link">
             <FaHome /> Home
+          </Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/pcbuilder" className="navbar-link">
+            <FaCogs /> PC Builder
           </Link>
         </li>
         <li className="navbar-item">
